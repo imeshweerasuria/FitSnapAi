@@ -8,4 +8,5 @@ object Routes {
     const val PROFILE_SETUP = "profile_setup"
     const val CALORIE_TARGET = "calorie_target"
     const val MEAL_LOG = "meal_log"
+    const val WORKOUT_LOG = "workout_log"
 }

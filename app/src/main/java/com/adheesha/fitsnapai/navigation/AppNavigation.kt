@@ -18,6 +18,8 @@ import com.adheesha.fitsnapai.screens.MealLogScreen
 import com.adheesha.fitsnapai.screens.ProfileSetupScreen
 import com.adheesha.fitsnapai.screens.RegisterScreen
 import com.adheesha.fitsnapai.screens.SplashScreen
+import com.adheesha.fitsnapai.screens.WorkoutLogScreen
+import com.adheesha.fitsnapai.workout.WorkoutViewModel
 import kotlinx.coroutines.delay
 
 @Composable
@@ -27,6 +29,7 @@ fun AppNavigation() {
     val profileViewModel: ProfileViewModel = viewModel()
     val nutritionTargetViewModel: NutritionTargetViewModel = viewModel()
     val mealLogViewModel: MealLogViewModel = viewModel()
+    val workoutViewModel: WorkoutViewModel = viewModel()
 
     NavHost(
         navController = navController,
@@ -98,6 +101,9 @@ fun AppNavigation() {
                 onMealLogClick = {
                     navController.navigate(Routes.MEAL_LOG)
                 },
+                onWorkoutLogClick = {
+                    navController.navigate(Routes.WORKOUT_LOG)
+                },
                 onLogoutSuccess = {
                     navController.navigate(Routes.LOGIN) {
                         popUpTo(Routes.HOME) {
@@ -145,6 +151,18 @@ fun AppNavigation() {
             MealLogScreen(
                 userId = userId,
                 mealLogViewModel = mealLogViewModel,
+                onBackClick = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Routes.WORKOUT_LOG) {
+            val userId = authViewModel.uiState.value.userId ?: ""
+
+            WorkoutLogScreen(
+                userId = userId,
+                workoutViewModel = workoutViewModel,
                 onBackClick = {
                     navController.popBackStack()
                 }

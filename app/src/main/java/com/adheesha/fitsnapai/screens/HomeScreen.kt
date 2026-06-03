@@ -31,6 +31,7 @@ fun HomeScreen(
     onProfileClick: () -> Unit,
     onCalorieTargetClick: () -> Unit,
     onMealLogClick: () -> Unit,
+    onWorkoutLogClick: () -> Unit,
     onLogoutSuccess: () -> Unit
 ) {
     val uiState by authViewModel.uiState.collectAsState()
@@ -121,7 +122,7 @@ fun HomeScreen(
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    Text("Manage your profile, targets, and daily meals.")
+                    Text("Manage your profile, meals, workouts, and nutrition targets.")
 
                     Spacer(modifier = Modifier.height(16.dp))
 
@@ -148,6 +149,15 @@ fun HomeScreen(
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text("Manual Meal Log")
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    OutlinedButton(
+                        onClick = onWorkoutLogClick,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Workout Log")
                     }
                 }
             }
