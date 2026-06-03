@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "857187451240",
+    "project_id": "fitsnapai-32c90",
+    "storage_bucket": "fitsnapai-32c90.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857187451240:android:a7a5ab4389d3cdb9f9d6dd",
+        "android_client_info": {
+          "package_name": "com.adheesha.fitsnapai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ20FuA94r6Vm4vhXTfe94fKT56ZqVgZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
