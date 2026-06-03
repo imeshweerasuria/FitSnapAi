@@ -14,6 +14,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -27,6 +28,7 @@ import com.adheesha.fitsnapai.auth.AuthViewModel
 @Composable
 fun HomeScreen(
     authViewModel: AuthViewModel,
+    onProfileClick: () -> Unit,
     onLogoutSuccess: () -> Unit
 ) {
     val uiState by authViewModel.uiState.collectAsState()
@@ -122,16 +124,23 @@ fun HomeScreen(
                     modifier = Modifier.padding(20.dp)
                 ) {
                     Text(
-                        text = "Next Pillars",
+                        text = "Pillar 2",
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
 
-                    Text("Pillar 2: Fitness Profile Setup")
-                    Text("Pillar 3: Daily Calorie Target")
-                    Text("Pillar 4: Manual Meal Logging")
+                    Text("Set up your fitness profile to calculate calorie targets later.")
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    OutlinedButton(
+                        onClick = onProfileClick,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Set Up / Edit Fitness Profile")
+                    }
                 }
             }
         }

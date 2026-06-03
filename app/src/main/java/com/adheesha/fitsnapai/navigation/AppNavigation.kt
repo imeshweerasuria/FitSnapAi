@@ -8,8 +8,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.adheesha.fitsnapai.auth.AuthViewModel
+import com.adheesha.fitsnapai.profile.ProfileViewModel
 import com.adheesha.fitsnapai.screens.HomeScreen
 import com.adheesha.fitsnapai.screens.LoginScreen
+import com.adheesha.fitsnapai.screens.ProfileSetupScreen
 import com.adheesha.fitsnapai.screens.RegisterScreen
 import com.adheesha.fitsnapai.screens.SplashScreen
 import kotlinx.coroutines.delay
@@ -18,6 +20,7 @@ import kotlinx.coroutines.delay
 fun AppNavigation() {
     val navController = rememberNavController()
     val authViewModel: AuthViewModel = viewModel()
+    val profileViewModel: ProfileViewModel = viewModel()
 
     NavHost(
         navController = navController,
@@ -65,7 +68,7 @@ fun AppNavigation() {
             RegisterScreen(
                 authViewModel = authViewModel,
                 onRegisterSuccess = {
-                    navController.navigate(Routes.HOME) {
+                    navController.navigate(Routes.PROFILE_SETUP) {
                         popUpTo(navController.graph.findStartDestination().id) {
                             inclusive = true
                         }
@@ -80,9 +83,28 @@ fun AppNavigation() {
         composable(Routes.HOME) {
             HomeScreen(
                 authViewModel = authViewModel,
+                onProfileClick = {
+                    navController.navigate(Routes.PROFILE_SETUP)
+                },
                 onLogoutSuccess = {
                     navController.navigate(Routes.LOGIN) {
                         popUpTo(Routes.HOME) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
+        }
+
+        composable(Routes.PROFILE_SETUP) {
+            val userId = authViewModel.uiState.value.userId ?: ""
+
+            ProfileSetupScreen(
+                userId = userId,
+                profileViewModel = profileViewModel,
+                onProfileSaved = {
+                    navController.navigate(Routes.HOME) {
+                        popUpTo(Routes.PROFILE_SETUP) {
                             inclusive = true
                         }
                     }
