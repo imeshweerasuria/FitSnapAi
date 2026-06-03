@@ -6,4 +6,5 @@ object Routes {
     const val REGISTER = "register"
     const val HOME = "home"
     const val PROFILE_SETUP = "profile_setup"
+    const val CALORIE_TARGET = "calorie_target"
 }

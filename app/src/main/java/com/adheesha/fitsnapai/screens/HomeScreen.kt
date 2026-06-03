@@ -29,6 +29,7 @@ import com.adheesha.fitsnapai.auth.AuthViewModel
 fun HomeScreen(
     authViewModel: AuthViewModel,
     onProfileClick: () -> Unit,
+    onCalorieTargetClick: () -> Unit,
     onLogoutSuccess: () -> Unit
 ) {
     val uiState by authViewModel.uiState.collectAsState()
@@ -47,7 +48,7 @@ fun HomeScreen(
             )
 
             Text(
-                text = "Pillar 1 completed: User Account",
+                text = "Gym & Calorie Tracker",
                 style = MaterialTheme.typography.bodyMedium
             )
 
@@ -76,18 +77,6 @@ fun HomeScreen(
                     Text(
                         text = uiState.userEmail ?: "No email found",
                         style = MaterialTheme.typography.bodyLarge
-                    )
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Text(
-                        text = "User ID",
-                        style = MaterialTheme.typography.labelMedium
-                    )
-
-                    Text(
-                        text = uiState.userId ?: "No user ID found",
-                        style = MaterialTheme.typography.bodySmall
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -124,14 +113,14 @@ fun HomeScreen(
                     modifier = Modifier.padding(20.dp)
                 ) {
                     Text(
-                        text = "Pillar 2",
+                        text = "Fitness Setup",
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    Text("Set up your fitness profile to calculate calorie targets later.")
+                    Text("Manage your profile and nutrition targets.")
 
                     Spacer(modifier = Modifier.height(16.dp))
 
@@ -140,6 +129,15 @@ fun HomeScreen(
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text("Set Up / Edit Fitness Profile")
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    OutlinedButton(
+                        onClick = onCalorieTargetClick,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Daily Calorie & Macro Target")
                     }
                 }
             }

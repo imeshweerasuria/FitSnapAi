@@ -8,7 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.adheesha.fitsnapai.auth.AuthViewModel
+import com.adheesha.fitsnapai.nutrition.NutritionTargetViewModel
 import com.adheesha.fitsnapai.profile.ProfileViewModel
+import com.adheesha.fitsnapai.screens.CalorieTargetScreen
 import com.adheesha.fitsnapai.screens.HomeScreen
 import com.adheesha.fitsnapai.screens.LoginScreen
 import com.adheesha.fitsnapai.screens.ProfileSetupScreen
@@ -21,6 +23,7 @@ fun AppNavigation() {
     val navController = rememberNavController()
     val authViewModel: AuthViewModel = viewModel()
     val profileViewModel: ProfileViewModel = viewModel()
+    val nutritionTargetViewModel: NutritionTargetViewModel = viewModel()
 
     NavHost(
         navController = navController,
@@ -86,6 +89,9 @@ fun AppNavigation() {
                 onProfileClick = {
                     navController.navigate(Routes.PROFILE_SETUP)
                 },
+                onCalorieTargetClick = {
+                    navController.navigate(Routes.CALORIE_TARGET)
+                },
                 onLogoutSuccess = {
                     navController.navigate(Routes.LOGIN) {
                         popUpTo(Routes.HOME) {
@@ -108,6 +114,21 @@ fun AppNavigation() {
                             inclusive = true
                         }
                     }
+                }
+            )
+        }
+
+        composable(Routes.CALORIE_TARGET) {
+            val userId = authViewModel.uiState.value.userId ?: ""
+
+            CalorieTargetScreen(
+                userId = userId,
+                nutritionTargetViewModel = nutritionTargetViewModel,
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onProfileClick = {
+                    navController.navigate(Routes.PROFILE_SETUP)
                 }
             )
         }
