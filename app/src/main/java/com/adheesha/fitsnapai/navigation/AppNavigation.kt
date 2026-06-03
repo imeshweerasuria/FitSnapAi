@@ -8,11 +8,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.adheesha.fitsnapai.auth.AuthViewModel
+import com.adheesha.fitsnapai.meal.MealLogViewModel
 import com.adheesha.fitsnapai.nutrition.NutritionTargetViewModel
 import com.adheesha.fitsnapai.profile.ProfileViewModel
 import com.adheesha.fitsnapai.screens.CalorieTargetScreen
 import com.adheesha.fitsnapai.screens.HomeScreen
 import com.adheesha.fitsnapai.screens.LoginScreen
+import com.adheesha.fitsnapai.screens.MealLogScreen
 import com.adheesha.fitsnapai.screens.ProfileSetupScreen
 import com.adheesha.fitsnapai.screens.RegisterScreen
 import com.adheesha.fitsnapai.screens.SplashScreen
@@ -24,6 +26,7 @@ fun AppNavigation() {
     val authViewModel: AuthViewModel = viewModel()
     val profileViewModel: ProfileViewModel = viewModel()
     val nutritionTargetViewModel: NutritionTargetViewModel = viewModel()
+    val mealLogViewModel: MealLogViewModel = viewModel()
 
     NavHost(
         navController = navController,
@@ -92,6 +95,9 @@ fun AppNavigation() {
                 onCalorieTargetClick = {
                     navController.navigate(Routes.CALORIE_TARGET)
                 },
+                onMealLogClick = {
+                    navController.navigate(Routes.MEAL_LOG)
+                },
                 onLogoutSuccess = {
                     navController.navigate(Routes.LOGIN) {
                         popUpTo(Routes.HOME) {
@@ -129,6 +135,18 @@ fun AppNavigation() {
                 },
                 onProfileClick = {
                     navController.navigate(Routes.PROFILE_SETUP)
+                }
+            )
+        }
+
+        composable(Routes.MEAL_LOG) {
+            val userId = authViewModel.uiState.value.userId ?: ""
+
+            MealLogScreen(
+                userId = userId,
+                mealLogViewModel = mealLogViewModel,
+                onBackClick = {
+                    navController.popBackStack()
                 }
             )
         }
